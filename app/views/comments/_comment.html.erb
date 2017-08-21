@@ -1,9 +1,14 @@
-<div class="comment">
+<div class="comment" data-comment-id="<%= comment.id %>">
   <span class="commenter-info">
     <strong class="commenter-name"><%= comment.name || 'Anon' %></strong>
      on <small class="comment-date"><%= comment.created_at.strftime('%d/%m/%Y')%></small>
      <em>wrote:</em>
+     <small>
+       <a href="" class="comment-delete" data-comment-id="<%= comment.id %>">
+         delete
+       </a>
+     </small>
   </span>
   <p class="comment-body"><%= comment.body %></p>
+  <hr>
 </div>
-<hr>

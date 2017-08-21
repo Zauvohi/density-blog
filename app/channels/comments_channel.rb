@@ -13,4 +13,10 @@ class CommentsChannel < ApplicationCable::Channel
     comment = Comment.new(name: data['name'], body: data['comment'], post: @post)
     comment.save!
   end
+
+  def delete(data)
+    id = data['commentId'].to_i
+    comment = Comment.find(id)
+    comment.destroy
+  end
 end
