@@ -27,9 +27,9 @@ $(document).on 'keypress', '[data-behavior~=post_comment]', (event) ->
     event.preventDefault()
 
 $(document).on 'click', '#post_btn', (event) ->
-  comment = $('[data-behavior~=post_comment]')
+  comment = document.querySelector('[data-behavior~=post_comment]')
   name = document.querySelector('[name=commenter]')
-  App.comments.post comment.val(), name.val()
-  comment.val('')
-  name.val('')
+  App.comments.post comment.value, name.value
+  comment.value = ''
+  name.value = ''
   event.preventDefault()

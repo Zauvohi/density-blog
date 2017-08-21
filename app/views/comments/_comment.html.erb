@@ -1,4 +1,9 @@
 <div class="comment">
-  <span><%= comment.name || 'Anon' %></span>
-  <p><%= comment.body %></p>
+  <span class="commenter-info">
+    <strong class="commenter-name"><%= comment.name || 'Anon' %></strong>
+     on <small class="comment-date"><%= comment.created_at.strftime('%d/%m/%Y')%></small>
+     <em>wrote:</em>
+  </span>
+  <p class="comment-body"><%= comment.body %></p>
 </div>
+<hr>
