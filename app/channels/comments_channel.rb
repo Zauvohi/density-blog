@@ -6,7 +6,7 @@ class CommentsChannel < ApplicationCable::Channel
   end
 
   def unsubscribe
-      stop_all_streams
+    stop_all_streams
   end
 
   def post(data)
