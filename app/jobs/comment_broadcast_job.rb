@@ -5,14 +5,14 @@ class CommentBroadcastJob < ApplicationJob
     if status == 'failed'
       # data = Post object
       CommentsChannel.broadcast_to data,
-      status: status,
-      errors: "Message's body can't be blank."
+        status: status,
+        errors: "Message's body can't be blank."
     else
       # data = Comment object
       CommentsChannel.broadcast_to data.post,
-      comment: render_comment(data, status),
-      status: status,
-      comment_id: data.id
+        comment: render_comment(data, status),
+        status: status,
+        comment_id: data.id
     end
   end
 
