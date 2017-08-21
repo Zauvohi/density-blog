@@ -6,7 +6,7 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
     @perform 'unsubscribe'
 
   received: (data) ->
-    @appendPost(data)
+    $('#comments').append(data['comment'])
 
   post: (comment, name) ->
     @perform 'post', comment: comment, name: name
@@ -16,17 +16,6 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
       @perform 'subscribe', post_id: postId
     else
       @perform 'unsubscribe'
-
-  appendPost: (data) ->
-    html = @createPost(data)
-    $('#comments').append(html)
-
-  createPost: (data) ->
-    """
-    <div>
-      <p>#{data['name'] || 'Anon'} said: #{data['comment']}</p>
-    </div>
-    """
 
 $(document).on 'keypress', '[data-behavior~=post_comment]', (event) ->
   name = document.querySelector('[name=commenter]')

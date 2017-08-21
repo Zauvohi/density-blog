@@ -10,6 +10,7 @@ class CommentsChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    CommentsChannel.broadcast_to @post, comment: data['comment'], name: data['name']
+    comment = Comment.new(name: data['name'], body: data['comment'], post: @post)
+    comment.save!
   end
 end
