@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This exercise tries to simulate a blog with live comments. For the comments we'll use ActionCable.
+There's no user authentication, so basically any user can create and delete posts/comments.
 
-Things you may want to cover:
+Things this exercise do:
 
-* Ruby version
+* A user can create a post.
 
-* System dependencies
+* A user can comment in any post.
 
-* Configuration
+* A user can delete the comments in a post.
 
-* Database creation
+* These comments are updated live, any new comment and deletion will be reflected on the other clients viewing that post.
 
-* Database initialization
 
-* How to run the test suite
+## Known issues
 
-* Services (job queues, cache servers, search engines, etc.)
+* Sometimes the comments are saved/deleted but the view won't update properly in one or all the clients, the user have to refresh and it'll work properly.
 
-* Deployment instructions
-
-* ...
+* Posts and comments don't have a proper formatting, everything is a single paragraph.
