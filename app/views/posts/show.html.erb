@@ -1,27 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<form class="comment-form" data-post-id="<%= params[:id] %>">
-  <label for="commenter">Name</label>
-  <input type="text" name="commenter">
-  <label for="comment">Comment</label>
-  <input type="text" name="comment" data-behavior="post_comment">
-  <input type="button" name="post-comment" value="New comment" id="post_btn">
-</form>
-
-<h3>Comments</h3>
-<div id="comments">
-  <%= render @post.comments %>
+<div class="row">
+  <p id="notice"><%= notice %></p>
 </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div class="text-center blog-title">
+  <h1><%= @post.title %></h1>
+  <small>Posted on: <%= @post.created_at.strftime('%d/%m/%Y') %></small>
+</div>
+<br>
+
+<div class="blog-content row">
+  <div class="center">
+    <p>
+      <%= @post.content %>
+    </p>
+  </div>
+</div>
+<div class="blog-controls text-center">
+  <small>
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path %>
+  </small>
+</div>
+<br>
+
+<div class="new-comment center">
+  <h4>Leave a new comment</h4>
+  <form class="comment-form" data-post-id="<%= params[:id] %>">
+    <div class="form-group">
+      <label for="commenter">Name</label>
+      <input type="text" name="commenter" class="form-control col-md-3 col-md-offset-5">
+    </div>
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <textarea type="text" name="comment" data-behavior="post_comment" class="form-control col-md-4"></textarea>
+    </div>
+    <button type="submit" id="post_btn" class="btn btn-default">New comment</button>
+  </form>
+</div>
+<br>
+
+<div class="comments-area center">
+  <h3>Comments</h3>
+  <div id="comments">
+    <%= render @post.comments %>
+  </div>
+</div>
