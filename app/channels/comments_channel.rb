@@ -1,12 +1,16 @@
 class CommentsChannel < ApplicationCable::Channel
-  def subscribed
-    # stream_from "some_channel"
+  def subscribe(data)
+    #puts "POST ID: #{data['post_id']}"
+    post_id = data['post_id'].to_i
+    @post = Post.find(post_id)
+    stream_for @post
   end
 
-  def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+  def unsubscribe
+      stop_all_streams
   end
 
-  def post(comment)
+  def post(data)
+    CommentsChannel.broadcast_to @post, comment: data['comment']
   end
 end

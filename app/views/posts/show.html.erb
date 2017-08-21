@@ -10,10 +10,10 @@
   <%= @post.content %>
 </p>
 
-<form class="comment-form">
+<form class="comment-form" data-post-id="<%= params[:id] %>">
   <label for="">Write a comment</label>
   <input type="text" name="comment" data-behavior="post_comment">
-  <input type="button" name="post-comment" value="New comment">
+  <input type="button" name="post-comment" value="New comment" id="post_btn">
 </form>
 
 <h3>Comments</h3>
