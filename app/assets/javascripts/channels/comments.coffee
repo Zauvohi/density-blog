@@ -8,8 +8,8 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
   received: (data) ->
     @appendPost(data)
 
-  post: (comment) ->
-    @perform 'post', comment: comment
+  post: (comment, name) ->
+    @perform 'post', comment: comment, name: name
 
   followCurrentPost: ->
     if postId = $('.comment-form').data('post-id')
@@ -24,14 +24,17 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
   createPost: (data) ->
     """
     <div>
-      <p>#{data['comment']}</p>
+      <p>#{data['name'] || 'Anon'} said: #{data['comment']}</p>
     </div>
     """
 
 $(document).on 'keypress', '[data-behavior~=post_comment]', (event) ->
+  name = document.querySelector('[name=commenter]')
+  comment = event.target
   if event.keyCode is 13
-    App.comments.post event.target.value
-    event.target.value = ''
+    App.comments.post comment.value, name.value
+    comment.value = ''
+    name.value = ''
     event.preventDefault()
 
 $(document).on 'click', '#post_btn', (event) ->
