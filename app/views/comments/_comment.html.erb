@@ -1,6 +1,6 @@
 <div class="comment" data-comment-id="<%= comment.id %>">
   <span class="commenter-info">
-    <strong class="commenter-name"><%= comment.name.nil? ? comment.name : 'Anon' %></strong>
+    <strong class="commenter-name"><%= comment.name.empty? ? 'Anon' : comment.name %></strong>
      on <small class="comment-date"><%= comment.created_at.strftime('%d/%m/%Y')%></small>
      <em>wrote:</em>
      <small>
