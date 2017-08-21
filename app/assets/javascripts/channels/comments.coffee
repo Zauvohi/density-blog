@@ -8,8 +8,10 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
   received: (data) ->
     if data['status'] is 'created'
       $('#comments').append(data['comment'])
-    else
+    else if data['status'] is 'destroyed'
       $(".comment[data-comment-id=#{data['comment_id']}]").remove()
+    else
+      alert(data['errors'])
 
   post: (comment, name) ->
     @perform 'post', comment: comment, name: name

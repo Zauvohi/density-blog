@@ -11,7 +11,11 @@ class CommentsChannel < ApplicationCable::Channel
 
   def post(data)
     comment = Comment.new(name: data['name'], body: data['comment'], post: @post)
-    comment.save!
+    if comment.valid?
+      comment.save!
+    else
+      CommentBroadcastJob.perform_later @post, 'failed'
+    end
   end
 
   def delete(data)

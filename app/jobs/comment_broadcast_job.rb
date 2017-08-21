@@ -1,11 +1,19 @@
 class CommentBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(comment, status)
-    CommentsChannel.broadcast_to comment.post,
-     comment: render_comment(comment, status),
-     status: status,
-     comment_id: comment.id
+  def perform(data, status)
+    if status == 'failed'
+      # data = Post object
+      CommentsChannel.broadcast_to data,
+      status: status,
+      errors: "Message's body can't be blank."
+    else
+      # data = Comment object
+      CommentsChannel.broadcast_to data.post,
+      comment: render_comment(data, status),
+      status: status,
+      comment_id: data.id
+    end
   end
 
   private
