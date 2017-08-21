@@ -1,29 +1,22 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="text-center">
+  <%= link_to 'New Post', new_post_path %>
+</div>
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<% @posts.reverse.each do |post| %>
+  <div class="text-center">
+    <h1><%= link_to "#{post.title}", post %></h1>
+    <br>
+    <section class="blog-contents">
+      <p><%= post.content %></p>
+    </section>
+    <br>
+    <small>
+      <%= link_to "Comments (#{post.comments.size})", post %> |
+      <%= link_to 'Edit entry', edit_post_path(post) %> |
+      <%= link_to 'Delete entry', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </small>
+  </div>
+  <br>
+<% end %>
