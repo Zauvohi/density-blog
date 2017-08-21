@@ -1,9 +1,4 @@
 <p id="notice"><%= notice %></p>
-<div class="text-center">
-  <%= link_to 'New Post', new_post_path %>
-</div>
-<br>
-
 <% @posts.reverse.each do |post| %>
   <div class="text-center">
     <h1><%= link_to "#{post.title}", post %></h1>
