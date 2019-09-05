@@ -1,21 +1,20 @@
 default: &default
-  adapter: sqlite3
-  pool: 5
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= 'density-blog_' + Rails.env %>
+  host: <%= ENV.fetch('DB_HOST') %>
+  username: <%= ENV.fetch('DB_USERNAME') %>
+  password: <%= ENV.fetch('DB_PASSWORD') %>
   timeout: 5000
 
 
 development:
   <<: *default
-  database: db/test.sqlite3
 
 test:
   <<: *default
-  database: density-blog_test
+  database: 'density-blog_test'
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: density-blog_production
-  username: density-blog
-  password: <%= ENV['DENSITY-BLOG_DATABASE_PASSWORD'] %>
+  <<: *default
