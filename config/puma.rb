@@ -14,8 +14,6 @@ environment rails_env
 #bind "unix://#{shared_dir}/sockets/puma.sock"
 control_app_url = "tcp://127.0.0.1:3000"
 activate_control_app control_app_url, { auth_token: ENV.fetch("CONTROL_APP_TOKEN") { '12345' } }
-# Logging
-stdout_redirect "#{shared_dir}/logs/puma.stdout.log", "#{shared_dir}/logs/puma.stderr.log", true
 
 # Set master PID and state locations
 pidfile "#{shared_dir}/pids/puma.pid"
